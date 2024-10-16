@@ -16,7 +16,7 @@ namespace Coherence.Generated
     using System.Runtime.InteropServices;
     using UnityEngine;
 
-    public struct _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f : IEntityCommand
+    public struct _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d : IEntityCommand
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
@@ -25,24 +25,28 @@ namespace Coherence.Generated
             public System.UInt32 clientID;
             [FieldOffset(4)]
             public Vector3 newPosition;
+            [FieldOffset(16)]
+            public Entity targetInteractable;
         }
 
-        public static unsafe _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f FromInterop(System.IntPtr data, System.Int32 dataSize) 
+        public static unsafe _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d FromInterop(System.IntPtr data, System.Int32 dataSize) 
         {
-            if (dataSize != 16) {
-                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 16) " +
+            if (dataSize != 20) {
+                throw new System.Exception($"Given data size is not equal to the struct size. ({dataSize} != 20) " +
                     "for command with ID 7");
             }
 
-            var orig = new _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f();
+            var orig = new _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d();
             var comp = (Interop*)data;
             orig.clientID = comp->clientID;
             orig.newPosition = comp->newPosition;
+            orig.targetInteractable = comp->targetInteractable;
             return orig;
         }
 
         public System.UInt32 clientID;
         public Vector3 newPosition;
+        public Entity targetInteractable;
         
         public Entity Entity { get; set; }
         public MessageTarget Routing { get; set; }
@@ -64,6 +68,13 @@ namespace Coherence.Generated
                 return err;
             }
             Entity = absoluteEntity;
+            err = mapper.MapToAbsoluteEntity(targetInteractable, false, out absoluteEntity);
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+            this.targetInteractable = absoluteEntity;
+            
             return IEntityMapper.Error.None;
         }
         
@@ -75,20 +86,33 @@ namespace Coherence.Generated
                 return err;
             }
             Entity = relativeEntity;
+            err = mapper.MapToRelativeEntity(targetInteractable, false, out relativeEntity);
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+            this.targetInteractable = relativeEntity;
+            
             return IEntityMapper.Error.None;
         }
 
         public HashSet<Entity> GetEntityRefs() {
-            return default;
+            return new HashSet<Entity> {
+                this.targetInteractable,
+            };
         }
 
         public void NullEntityRefs(Entity entity) {
+            if (this.targetInteractable == entity) {
+                this.targetInteractable = Entity.InvalidRelative;
+            }
         }
         
-        public _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f(
+        public _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d(
         Entity entity,
         System.UInt32 clientID,
-        Vector3 newPosition
+        Vector3 newPosition,
+        Entity targetInteractable
 )
         {
             Entity = entity;
@@ -97,27 +121,31 @@ namespace Coherence.Generated
             
             this.clientID = clientID; 
             this.newPosition = newPosition; 
+            this.targetInteractable = targetInteractable; 
         }
         
-        public static void Serialize(_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f commandData, IOutProtocolBitStream bitStream)
+        public static void Serialize(_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d commandData, IOutProtocolBitStream bitStream)
         {
             bitStream.WriteUIntegerRange(commandData.clientID, 32, 0);
             var converted_newPosition = commandData.newPosition.ToCoreVector3();
             bitStream.WriteVector3(converted_newPosition, FloatMeta.NoCompression());
+            bitStream.WriteEntity(commandData.targetInteractable);
         }
         
-        public static _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
+        public static _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d Deserialize(IInProtocolBitStream bitStream, Entity entity, MessageTarget target)
         {
             var dataclientID = bitStream.ReadUIntegerRange(32, 0);
             var converted_newPosition = bitStream.ReadVector3(FloatMeta.NoCompression());
             var datanewPosition = converted_newPosition.ToUnityVector3();
+            var datatargetInteractable = bitStream.ReadEntity();
     
-            return new _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f()
+            return new _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d()
             {
                 Entity = entity,
                 Routing = target,
                 clientID = dataclientID,
-                newPosition = datanewPosition
+                newPosition = datanewPosition,
+                targetInteractable = datatargetInteractable
             };   
         }
     }

@@ -77,7 +77,15 @@ public class Simulator : MonoBehaviour
     public void MoveCharacterTo(uint clientID, Vector3 newPosition)
     {
 #if COHERENCE_SIMULATOR
-        _characters[(ClientID)clientID].MoveTo(newPosition);
+        _characters[(ClientID)clientID].MoveTo(newPosition, null);
+#endif
+    }
+
+    [Command(defaultRouting = MessageTarget.AuthorityOnly)]
+    public void MoveCharacterToInteract(uint clientID, Vector3 newPosition, CoherenceSync targetInteractable)
+    {
+#if COHERENCE_SIMULATOR
+        _characters[(ClientID)clientID].MoveTo(newPosition, targetInteractable);
 #endif
     }
 }

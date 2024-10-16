@@ -1,3 +1,4 @@
+using Coherence;
 using Coherence.Toolkit;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -9,14 +10,17 @@ public class Character : MonoBehaviour
     [SerializeField] private CinemachineCamera _cmCameraPrefab;
     
     [Sync] public uint clientId;
+    [Sync] public CoherenceSync targetInteractable;
     [Sync, OnValueSynced(nameof(OnColorChanged))] public Color color;
     
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     private CoherenceBridge _coherenceBridge;
+    private CoherenceSync _coherenceSync;
 
     private void Awake()
     {
+        _coherenceSync = GetComponent<CoherenceSync>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
         
@@ -49,16 +53,21 @@ public class Character : MonoBehaviour
         GetComponentInChildren<SkinnedMeshRenderer>().material.color = newValue;
     }
     
-    public void MoveTo(Vector3 newPosition)
+    public void MoveTo(Vector3 newPosition, CoherenceSync targetInteractable = null)
     {
         _navMeshAgent.destination = newPosition;
         _animator.SetBool("IsMoving", true);
+        this.targetInteractable = targetInteractable;
     }
 
     public void Update()
     {
         if (_navMeshAgent.remainingDistance < 0.1f)
         {
+            if (targetInteractable != null)
+            {
+                _coherenceSync.SendMessage<Animator>(nameof(Animator.SetTrigger), MessageTarget.AuthorityOnly, "Interact");
+            }
             _animator.SetBool("IsMoving", false);
         }
     }

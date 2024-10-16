@@ -53,6 +53,10 @@ PrefabInstance:
       value: campfire-pit
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -63,5 +67,217 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6769277355577542402}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2223675769715919042}
   m_SourcePrefab: {fileID: 100100000, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+--- !u!23 &444573746207124180 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1612391659230466491 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &1718128362767557869 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: -8776705942540922179, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2101928713603795713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &6769277355577542402
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101928713603795713}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.56
+  m_Center: {x: 0, y: 0.29090017, z: 0}
+--- !u!114 &2223675769715919042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101928713603795713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff62c046a053f416a8dc48ad6483a25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateRemote:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInputRemote:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStateAuthority:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInputAuthority:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAuthorityRequestRejected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAuthTransferComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  OnConnectedEntityChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInputSimulatorConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  coherenceSyncConfig: {fileID: 11400000, guid: c46b10eb4926442e3bb606d67e281c98, type: 2}
+  archetype:
+    lodLevels:
+    - distance: 0
+    boundComponents:
+    - component: {fileID: 1612391659230466491}
+      lodStepsActive: 1
+    - component: {fileID: 2436313526712868382}
+      lodStepsActive: 1
+    - component: {fileID: 444573746207124180}
+      lodStepsActive: 1
+    - component: {fileID: 6769277355577542402}
+      lodStepsActive: 1
+    - component: {fileID: 3487576390594451947}
+      lodStepsActive: 1
+    - component: {fileID: 1718128362767557869}
+      lodStepsActive: 1
+    - component: {fileID: 7898863333888778073}
+      lodStepsActive: 1
+    GeneratesArchetypeDefinition: 0
+  interpolationLocation: 1
+  RigidbodyUpdateMode: 0
+  OnRigidbody2DPositionUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRigidbody3DPositionUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRigidbody2DRotationUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRigidbody3DRotationUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  bakedScriptType: Coherence.Generated.CoherenceSync_d1ae2773807d14e4b965a75af4054920,
+    Assembly-CSharp
+  approveAuthorityTransferRequests: 1
+  simulationType: 2
+  authorityTransferType: 2
+  orphanedBehavior: 1
+  lifetimeType: 1
+  uniquenessType: 1
+  replacementStrategy: 0
+  unsyncedNetworkEntityPriority: 0
+  preserveChildren: 0
+  bindings:
+  - rid: 8889060404990574821
+  onNetworkedInstantiation:
+    m_PersistentCalls:
+      m_Calls: []
+  onBeforeNetworkedInstantiation:
+    m_PersistentCalls:
+      m_Calls: []
+  onNetworkedDestruction:
+    m_PersistentCalls:
+      m_Calls: []
+  scenePrefabInstanceUUID: 
+  coherenceUUID: 
+  assetVersion: 
+  usingReflection: 0
+  coherenceTag: 
+  componentActions: []
+  floatingOriginMode: 0
+  floatingOriginParentedMode: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8889060404990574821
+      type: {class: PositionBinding, ns: Coherence.Toolkit.Bindings.TransformBindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8889060404990574822
+        routing: 0
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: 06cf95da2c384e69af5c0caf16b32630
+        archetypeData:
+          type: 7
+          minRange: 0
+          maxRange: 0
+          sampleRate: 20
+          floatCompression: 0
+          fields:
+          - type: 7
+            bits: 32
+            precision: 0.001
+            floatCompression: 0
+        unityComponent: {fileID: 1612391659230466491}
+        coherenceSync: {fileID: 2223675769715919042}
+        interpolationSettings: {fileID: 11400000, guid: ae4419d1d9a8643709bf5f6b90c584a5, type: 2}
+    - rid: 8889060404990574822
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: position
+        monoAssemblyType: UnityEngine.Vector3, UnityEngine
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 1
+        valueSyncCallbackName: 
+        memberType: 64
+        parameterAssemblyTypes: []
+        ownerType:
+          assemblyQualifiedName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.TransformBindings.PositionBinding,
+            Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
+--- !u!33 &2436313526712868382 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3487576390594451947 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6805861623951347781, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7898863333888778073 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8967936297961072905, guid: d2044d581e0ce4deebfa5d25f9dcd69a, type: 3}
+  m_PrefabInstance: {fileID: 1291095853813036624}
+  m_PrefabAsset: {fileID: 0}

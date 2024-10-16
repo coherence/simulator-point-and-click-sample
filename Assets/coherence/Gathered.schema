@@ -4,8 +4,14 @@ component _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 [id "153"]
 component _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110 [id "154"]
   color Color [bits "32", compression "FixedPoint", range-min "0", range-max "1", precision "2.3283064370808E-10"]
   clientId UInt [bits "32", range-min "0", range-max "4294967295"]
+  targetInteractable Entity [bits "20", client-type "Coherence.Toolkit.CoherenceSync"]
 
-command _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f [id "7", routing "All"]
+command _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d [id "7", routing "All"]
+  clientID UInt 
+  newPosition Vector3 [compression "None"]
+  targetInteractable Entity [client-type "Coherence.Toolkit.CoherenceSync"]
+
+command _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8 [id "8", routing "All"]
   clientID UInt 
   newPosition Vector3 [compression "None"]
 

@@ -1894,8 +1894,9 @@ namespace Coherence.Generated
 
                     val.color = orig.color;
                     val.clientId = orig.clientId;
+                    val.targetInteractable = orig.targetInteractable;
 
-                    updater.UpdateComponent(entity, componentType, val, 20, component.FieldsMask, component.StoppedMask, frames);
+                    updater.UpdateComponent(entity, componentType, val, 24, component.FieldsMask, component.StoppedMask, frames);
 
                     return;
                 }
@@ -1915,7 +1916,8 @@ namespace Coherence.Generated
                   case 4: return PersistenceReady.FromInterop(data, dataSize);
                   case 5: return SceneIndexChanged.FromInterop(data, dataSize);
                   case 6: return GenericCommand.FromInterop(data, dataSize);
-                  case 7: return _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f.FromInterop(data, dataSize);
+                  case 7: return _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d.FromInterop(data, dataSize);
+                  case 8: return _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8.FromInterop(data, dataSize);
             }
 
             throw new ArgumentException($"Unkown command type {type}", nameof(type));
@@ -2017,8 +2019,21 @@ namespace Coherence.Generated
 
                 case 7:
                 {
-                    var orig = (_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f)command;
-                    var val = new _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f.Interop();
+                    var orig = (_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d)command;
+                    var val = new _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d.Interop();
+
+                    val.clientID = orig.clientID;
+                    val.newPosition = orig.newPosition;
+                    val.targetInteractable = orig.targetInteractable;
+
+                    return sender.SendCommand(entity, target, type, val, 20);
+
+                }
+
+                case 8:
+                {
+                    var orig = (_47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8)command;
+                    var val = new _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8.Interop();
 
                     val.clientID = orig.clientID;
                     val.newPosition = orig.newPosition;

@@ -20,7 +20,7 @@ namespace Coherence.Generated
 
     public class Definition : IDefinition
     {
-        public const string schemaId = "2411bc66c079170e93bf64e8d1a22462875f8387";
+        public const string schemaId = "a81f13a00416e651f97185909a67cf856cf5ec32";
         public const uint InternalWorldPosition = 0;
         public const uint InternalWorldOrientation = 1;
         public const uint InternalLocalUserComponent = 2;
@@ -183,7 +183,8 @@ namespace Coherence.Generated
         public const uint InternalPersistenceReady = 4;
         public const uint InternalSceneIndexChanged = 5;
         public const uint InternalGenericCommand = 6;
-        public const uint Internal_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f = 7;
+        public const uint Internal_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d = 7;
+        public const uint Internal_47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8 = 8;
 
         private static readonly Dictionary<uint, string> componentNamesForTypeIds = new Dictionary<uint, string>()
         {
@@ -365,7 +366,8 @@ namespace Coherence.Generated
             { Definition.InternalPersistenceReady , MessageTarget.All },
             { Definition.InternalSceneIndexChanged , MessageTarget.All },
             { Definition.InternalGenericCommand , MessageTarget.All },
-            { Definition.Internal_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f , MessageTarget.All },
+            { Definition.Internal_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d , MessageTarget.All },
+            { Definition.Internal_47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8 , MessageTarget.All },
         };
 
         public ICoherenceComponentData ReadComponentUpdate(uint componentType, AbsoluteSimulationFrame referenceSimulationFrame,
@@ -1030,8 +1032,10 @@ namespace Coherence.Generated
                     return SceneIndexChanged.Deserialize(bitStream, entity, target);
                 case Definition.InternalGenericCommand:
                     return GenericCommand.Deserialize(bitStream, entity, target);
-                case Definition.Internal_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f:
-                    return _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f.Deserialize(bitStream, entity, target);
+                case Definition.Internal_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d:
+                    return _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d.Deserialize(bitStream, entity, target);
+                case Definition.Internal_47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8:
+                    return _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8.Deserialize(bitStream, entity, target);
                 default:
                     throw new System.ArgumentOutOfRangeException(nameof(commandType),
                         $"Missing serialization implementation for a command: {commandType}");
@@ -1122,8 +1126,11 @@ namespace Coherence.Generated
                 case Definition.InternalGenericCommand:
                     GenericCommand.Serialize((GenericCommand)data, bitStream);
                     break;
-                case Definition.Internal_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f:
-                    _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f.Serialize((_47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f)data, bitStream);
+                case Definition.Internal_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d:
+                    _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d.Serialize((_47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d)data, bitStream);
+                    break;
+                case Definition.Internal_47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8:
+                    _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8.Serialize((_47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8)data, bitStream);
                     break;
                 default:
                     logger.Error("Missing serialization implementation for a command.", ("command", commandType));

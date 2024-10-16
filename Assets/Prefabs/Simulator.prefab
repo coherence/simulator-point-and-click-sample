@@ -106,7 +106,8 @@ MonoBehaviour:
   preserveChildren: 0
   bindings:
   - rid: 8889060356264296711
-  - rid: 8889060383739085671
+  - rid: 8889060404990575066
+  - rid: 8889060404990575067
   onNetworkedInstantiation:
     m_PersistentCalls:
       m_Calls: []
@@ -174,16 +175,16 @@ MonoBehaviour:
             Coherence.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
-    - rid: 8889060383739085671
+    - rid: 8889060404990575066
       type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
         descriptor:
-          rid: 8889060383739085672
+          rid: 8889060404990575068
         routing: 1
         syncMode: 0
         isPredicted: 0
         predictionMode: 0
-        guid: 7ebcb117403b44f183ab55b12816462f
+        guid: 416df695042f46feb7547f187beaf9b8
         archetypeData:
           type: 0
           minRange: 0
@@ -194,7 +195,27 @@ MonoBehaviour:
         unityComponent: {fileID: 7349519121202400220}
         coherenceSync: {fileID: 4338797305567875466}
         interpolationSettings: {fileID: 0}
-    - rid: 8889060383739085672
+    - rid: 8889060404990575067
+      type: {class: CommandBinding, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        descriptor:
+          rid: 8889060404990575069
+        routing: 1
+        syncMode: 0
+        isPredicted: 0
+        predictionMode: 0
+        guid: 25a8bb0c04414bef96bfe36fbdf3a05d
+        archetypeData:
+          type: 0
+          minRange: 0
+          maxRange: 0
+          sampleRate: 0
+          floatCompression: 0
+          fields: []
+        unityComponent: {fileID: 7349519121202400220}
+        coherenceSync: {fileID: 4338797305567875466}
+        interpolationSettings: {fileID: 0}
+    - rid: 8889060404990575068
       type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
       data:
         name: MoveCharacterTo
@@ -206,6 +227,30 @@ MonoBehaviour:
         parameterAssemblyTypes:
         - System.UInt32, mscorlib
         - UnityEngine.Vector3, UnityEngine
+        ownerType:
+          assemblyQualifiedName: Simulator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        defaultSyncMode: 0
+        CustomData:
+          rid: -2
+        bindingType:
+          assemblyQualifiedName: Coherence.Toolkit.Bindings.CommandBinding, Coherence.Toolkit,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        oldName: 
+        oldParameterAssemblyTypes: []
+    - rid: 8889060404990575069
+      type: {class: Descriptor, ns: Coherence.Toolkit.Bindings, asm: Coherence.Toolkit}
+      data:
+        name: MoveCharacterToInteract
+        monoAssemblyType: 
+        required: 1
+        enforcesLODingWhenFieldsOverriden: 0
+        valueSyncCallbackName: 
+        memberType: 8
+        parameterAssemblyTypes:
+        - System.UInt32, mscorlib
+        - UnityEngine.Vector3, UnityEngine
+        - Coherence.Toolkit.CoherenceSync, Coherence.Toolkit
         ownerType:
           assemblyQualifiedName: Simulator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
             PublicKeyToken=null

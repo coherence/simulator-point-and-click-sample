@@ -29,12 +29,14 @@ namespace Coherence.Generated
             public Vector4 color;
             [FieldOffset(16)]
             public System.UInt32 clientId;
+            [FieldOffset(20)]
+            public Entity targetInteractable;
         }
 
         public static unsafe _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
         {
-            if (dataSize != 20) {
-                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 20) " +
+            if (dataSize != 24) {
+                throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 24) " +
                     "for component with ID 154");
             }
 
@@ -49,6 +51,7 @@ namespace Coherence.Generated
 
             orig.color = comp->color;
             orig.clientId = comp->clientId;
+            orig.targetInteractable = comp->targetInteractable;
 
             return orig;
         }
@@ -60,42 +63,84 @@ namespace Coherence.Generated
         public static uint clientIdMask => 0b00000000000000000000000000000010;
         public AbsoluteSimulationFrame clientIdSimulationFrame;
         public System.UInt32 clientId;
+        public static uint targetInteractableMask => 0b00000000000000000000000000000100;
+        public AbsoluteSimulationFrame targetInteractableSimulationFrame;
+        public Entity targetInteractable;
 
         public uint FieldsMask { get; set; }
         public uint StoppedMask { get; set; }
         public uint GetComponentType() => 154;
         public int PriorityLevel() => 100;
         public const int order = 0;
-        public uint InitialFieldsMask() => 0b00000000000000000000000000000011;
+        public uint InitialFieldsMask() => 0b00000000000000000000000000000111;
         public bool HasFields() => true;
-        public bool HasRefFields() => false;
+        public bool HasRefFields() => true;
 
 
         public long[] GetSimulationFrames() {
             return null;
         }
 
-        public int GetFieldCount() => 2;
+        public int GetFieldCount() => 3;
 
 
         
         public HashSet<Entity> GetEntityRefs()
         {
-            return default;
+            return new HashSet<Entity>()
+            {
+                this.targetInteractable,
+            };
         }
 
         public uint ReplaceReferences(Entity fromEntity, Entity toEntity)
         {
-            return 0;
+            uint refsMask = 0;
+
+            if (this.targetInteractable == fromEntity)
+            {
+                this.targetInteractable = toEntity;
+                refsMask |= 1 << 2;
+            }
+
+            FieldsMask |= refsMask;
+
+            return refsMask;
         }
         
         public IEntityMapper.Error MapToAbsolute(IEntityMapper mapper)
         {
+            Entity absoluteEntity;
+            IEntityMapper.Error err;
+            err = mapper.MapToAbsoluteEntity(this.targetInteractable, false, out absoluteEntity);
+
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+
+            this.targetInteractable = absoluteEntity;
             return IEntityMapper.Error.None;
         }
 
         public IEntityMapper.Error MapToRelative(IEntityMapper mapper)
         {
+            Entity relativeEntity;
+            IEntityMapper.Error err;
+            // We assume that the inConnection held changes with unresolved references, so the 'createMapping=true' is
+            // there only because there's a chance that the parent creation change will be processed after this one
+            // meaning there's no mapping for the parent yet. This wouldn't be necessary if mapping creation would happen
+            // in the clientWorld via create/destroy requests while here we would only check whether mapping exists or not.
+            var createParentMapping_targetInteractable = true;
+            err = mapper.MapToRelativeEntity(this.targetInteractable, createParentMapping_targetInteractable,
+             out relativeEntity);
+
+            if (err != IEntityMapper.Error.None)
+            {
+                return err;
+            }
+
+            this.targetInteractable = relativeEntity;
             return IEntityMapper.Error.None;
         }
 
@@ -136,6 +181,13 @@ namespace Coherence.Generated
             }
 
             otherMask >>= 1;
+            if ((otherMask & 0x01) != 0)
+            {
+                this.targetInteractableSimulationFrame = other.targetInteractableSimulationFrame;
+                this.targetInteractable = other.targetInteractable;
+            }
+
+            otherMask >>= 1;
             StoppedMask |= other.StoppedMask;
 
             return this;
@@ -150,7 +202,7 @@ namespace Coherence.Generated
         {
             if (bitStream.WriteMask(data.StoppedMask != 0))
             {
-                bitStream.WriteMaskBits(data.StoppedMask, 2);
+                bitStream.WriteMaskBits(data.StoppedMask, 3);
             }
 
             var mask = data.FieldsMask;
@@ -182,6 +234,18 @@ namespace Coherence.Generated
             }
 
             mask >>= 1;
+            if (bitStream.WriteMask((mask & 0x01) != 0))
+            {
+
+
+                var fieldValue = data.targetInteractable;
+
+
+
+                bitStream.WriteEntity(fieldValue);
+            }
+
+            mask >>= 1;
 
             return mask;
         }
@@ -191,7 +255,7 @@ namespace Coherence.Generated
             var stoppedMask = (uint)0;
             if (bitStream.ReadMask())
             {
-                stoppedMask = bitStream.ReadMaskBits(2);
+                stoppedMask = bitStream.ReadMaskBits(3);
             }
 
             var val = new _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110();
@@ -207,6 +271,12 @@ namespace Coherence.Generated
                 val.clientId = bitStream.ReadUIntegerRange(32, 0);
                 val.FieldsMask |= _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110.clientIdMask;
             }
+            if (bitStream.ReadMask())
+            {
+
+                val.targetInteractable = bitStream.ReadEntity();
+                val.FieldsMask |= _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110.targetInteractableMask;
+            }
 
             val.StoppedMask = stoppedMask;
 
@@ -219,8 +289,9 @@ namespace Coherence.Generated
             return $"_66694146d0cbe4600b7e26ae35719cfa_7769962969807975110(" +
                 $" color: { this.color }" +
                 $" clientId: { this.clientId }" +
-                $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(2, '0') }, " +
-                $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(2, '0') })";
+                $" targetInteractable: { this.targetInteractable }" +
+                $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(3, '0') }, " +
+                $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(3, '0') })";
         }
     }
 

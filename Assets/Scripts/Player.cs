@@ -34,15 +34,27 @@ public class Player : MonoBehaviour
             Ray ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                RequestMoveTo(hit.point);
+                RequestMoveTo(hit);
             }
         }
     }
 
-    private void RequestMoveTo(Vector3 desiredPosition)
+    private void RequestMoveTo(RaycastHit hit)
     {
-        _simulatorSync.SendCommand<Simulator>(nameof(Simulator.MoveCharacterTo), MessageTarget.AuthorityOnly,
-            (uint)_coherenceBridge.ClientConnections.GetMine().ClientId, desiredPosition);
+        Vector3 desiredPosition = hit.point;
+        desiredPosition.y = 0f;
+
+        if (hit.collider.gameObject.CompareTag("Interactable"))
+        {
+            CoherenceSync targetInteractable = hit.collider.gameObject.GetComponent<CoherenceSync>();
+            _simulatorSync.SendCommand<Simulator>(nameof(Simulator.MoveCharacterToInteract), MessageTarget.AuthorityOnly,
+                (uint)_coherenceBridge.ClientConnections.GetMine().ClientId, desiredPosition, targetInteractable);
+        }
+        else
+        {
+            _simulatorSync.SendCommand<Simulator>(nameof(Simulator.MoveCharacterTo), MessageTarget.AuthorityOnly,
+                (uint)_coherenceBridge.ClientConnections.GetMine().ClientId, desiredPosition);
+        }
         
         _positionMarker.SetActive(true);
         _positionMarker.transform.position = desiredPosition;
