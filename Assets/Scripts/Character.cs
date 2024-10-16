@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
         {
             if (targetInteractable != null)
             {
-                _coherenceSync.SendMessage<Animator>(nameof(Animator.SetTrigger), MessageTarget.AuthorityOnly, "Interact");
+                _coherenceSync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.AuthorityOnly, "Interact");
             }
             _animator.SetBool("IsMoving", false);
         }
