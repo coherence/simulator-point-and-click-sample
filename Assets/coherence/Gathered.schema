@@ -1,0 +1,11 @@
+component _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 [id "153"]
+  IsMoving Bool [bits "1"]
+
+component _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110 [id "154"]
+  color Color [bits "32", compression "FixedPoint", range-min "0", range-max "1", precision "2.3283064370808E-10"]
+  clientId UInt [bits "32", range-min "0", range-max "4294967295"]
+
+command _47361547313d541f3ac181c817c5c727_7ebcb117403b44f183ab55b12816462f [id "7", routing "All"]
+  clientID UInt 
+  newPosition Vector3 [compression "None"]
+
