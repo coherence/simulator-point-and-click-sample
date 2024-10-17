@@ -1,4 +1,4 @@
-component _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 [id "153"]
+component _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446 [id "153"]
   IsMoving Bool [bits "1"]
 
 component _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110 [id "154"]
@@ -14,4 +14,7 @@ command _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d [id "
 command _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8 [id "8", routing "All"]
   clientID UInt 
   newPosition Vector3 [compression "None"]
+
+command _66694146d0cbe4600b7e26ae35719cfa_1240684a5cbb46ee9451b159a1bc6bdf [id "9", routing "All"]
+  name String 
 

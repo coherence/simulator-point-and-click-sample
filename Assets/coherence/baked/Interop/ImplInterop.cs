@@ -177,7 +177,7 @@ namespace Coherence.Generated
                 case 150: return GenericFieldULong3.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 151: return GenericFieldColor0.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 152: return GenericFieldColor1.FromInterop(data, dataSize, simFrames, simFramesCount);
-                case 153: return _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190.FromInterop(data, dataSize, simFrames, simFramesCount);
+                case 153: return _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446.FromInterop(data, dataSize, simFrames, simFramesCount);
                 case 154: return _66694146d0cbe4600b7e26ae35719cfa_7769962969807975110.FromInterop(data, dataSize, simFrames, simFramesCount);
             }
 
@@ -1878,8 +1878,8 @@ namespace Coherence.Generated
                 }
                 case 153:
                 {
-                    var orig = (_66694146d0cbe4600b7e26ae35719cfa_1624268265457686190)component;
-                    var val = new _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190.Interop();
+                    var orig = (_66694146d0cbe4600b7e26ae35719cfa_1988367120477997446)component;
+                    var val = new _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446.Interop();
 
                     val.IsMoving = orig.IsMoving ? (System.Byte)1 : (System.Byte)0;
 
@@ -1918,6 +1918,7 @@ namespace Coherence.Generated
                   case 6: return GenericCommand.FromInterop(data, dataSize);
                   case 7: return _47361547313d541f3ac181c817c5c727_25a8bb0c04414bef96bfe36fbdf3a05d.FromInterop(data, dataSize);
                   case 8: return _47361547313d541f3ac181c817c5c727_416df695042f46feb7547f187beaf9b8.FromInterop(data, dataSize);
+                  case 9: return _66694146d0cbe4600b7e26ae35719cfa_1240684a5cbb46ee9451b159a1bc6bdf.FromInterop(data, dataSize);
             }
 
             throw new ArgumentException($"Unkown command type {type}", nameof(type));
@@ -2041,6 +2042,17 @@ namespace Coherence.Generated
                     return sender.SendCommand(entity, target, type, val, 16);
 
                 }
+
+                case 9:
+                {
+                    var orig = (_66694146d0cbe4600b7e26ae35719cfa_1240684a5cbb46ee9451b159a1bc6bdf)command;
+                    var val = new _66694146d0cbe4600b7e26ae35719cfa_1240684a5cbb46ee9451b159a1bc6bdf.Interop();
+
+                    var pinnedname = orig.name != null ? Encoding.UTF8.GetBytes(orig.name) : null; fixed (void* pinnedPtrname = pinnedname) { val.name = new ByteArray { Data = pinnedPtrname, Length =  pinnedname?.Length ?? 0 };
+
+                    return sender.SendCommand(entity, target, type, val, 16);
+
+}                }
 
             }
 

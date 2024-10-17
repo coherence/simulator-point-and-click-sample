@@ -20,7 +20,7 @@ namespace Coherence.Generated
     using UnityEngine;
     using Coherence.Toolkit;
 
-    public struct _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 : ICoherenceComponentData
+    public struct _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446 : ICoherenceComponentData
     {
         [StructLayout(LayoutKind.Explicit)]
         public struct Interop
@@ -29,7 +29,7 @@ namespace Coherence.Generated
             public System.Byte IsMoving;
         }
 
-        public static unsafe _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
+        public static unsafe _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446 FromInterop(IntPtr data, Int32 dataSize, InteropAbsoluteSimulationFrame* simFrames, Int32 simFramesCount)
         {
             if (dataSize != 1) {
                 throw new Exception($"Given data size is not equal to the struct size. ({dataSize} != 1) " +
@@ -41,7 +41,7 @@ namespace Coherence.Generated
                     "for component with ID 153");
             }
 
-            var orig = new _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190();
+            var orig = new _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446();
 
             var comp = (Interop*)data;
 
@@ -108,7 +108,7 @@ namespace Coherence.Generated
 
         public ICoherenceComponentData MergeWith(ICoherenceComponentData data)
         {
-            var other = (_66694146d0cbe4600b7e26ae35719cfa_1624268265457686190)data;
+            var other = (_66694146d0cbe4600b7e26ae35719cfa_1988367120477997446)data;
             var otherMask = other.FieldsMask;
 
             FieldsMask |= otherMask;
@@ -131,7 +131,7 @@ namespace Coherence.Generated
             throw new System.NotSupportedException($"{nameof(DiffWith)} is not supported in Unity");
         }
 
-        public static uint Serialize(_66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 data, bool isRefSimFrameValid, AbsoluteSimulationFrame referenceSimulationFrame, IOutProtocolBitStream bitStream, Logger logger)
+        public static uint Serialize(_66694146d0cbe4600b7e26ae35719cfa_1988367120477997446 data, bool isRefSimFrameValid, AbsoluteSimulationFrame referenceSimulationFrame, IOutProtocolBitStream bitStream, Logger logger)
         {
             if (bitStream.WriteMask(data.StoppedMask != 0))
             {
@@ -156,7 +156,7 @@ namespace Coherence.Generated
             return mask;
         }
 
-        public static _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190 Deserialize(AbsoluteSimulationFrame referenceSimulationFrame, InProtocolBitStream bitStream)
+        public static _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446 Deserialize(AbsoluteSimulationFrame referenceSimulationFrame, InProtocolBitStream bitStream)
         {
             var stoppedMask = (uint)0;
             if (bitStream.ReadMask())
@@ -164,12 +164,12 @@ namespace Coherence.Generated
                 stoppedMask = bitStream.ReadMaskBits(1);
             }
 
-            var val = new _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190();
+            var val = new _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446();
             if (bitStream.ReadMask())
             {
 
                 val.IsMoving = bitStream.ReadBool();
-                val.FieldsMask |= _66694146d0cbe4600b7e26ae35719cfa_1624268265457686190.IsMovingMask;
+                val.FieldsMask |= _66694146d0cbe4600b7e26ae35719cfa_1988367120477997446.IsMovingMask;
             }
 
             val.StoppedMask = stoppedMask;
@@ -180,7 +180,7 @@ namespace Coherence.Generated
 
         public override string ToString()
         {
-            return $"_66694146d0cbe4600b7e26ae35719cfa_1624268265457686190(" +
+            return $"_66694146d0cbe4600b7e26ae35719cfa_1988367120477997446(" +
                 $" IsMoving: { this.IsMoving }" +
                 $" Mask: { System.Convert.ToString(FieldsMask, 2).PadLeft(1, '0') }, " +
                 $"Stopped: { System.Convert.ToString(StoppedMask, 2).PadLeft(1, '0') })";

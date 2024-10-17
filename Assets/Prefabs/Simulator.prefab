@@ -122,7 +122,8 @@ MonoBehaviour:
   assetVersion: 
   usingReflection: 0
   coherenceTag: 
-  componentActions: []
+  componentActions:
+  - rid: 8889060423105511597
   floatingOriginMode: 0
   floatingOriginParentedMode: 1
   references:
@@ -262,6 +263,10 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         oldName: 
         oldParameterAssemblyTypes: []
+    - rid: 8889060423105511597
+      type: {class: DisableBehaviourComponentAction, ns: Coherence.Toolkit.ComponentActions, asm: Coherence.Toolkit}
+      data:
+        component: {fileID: 7349519121202400220}
 --- !u!114 &7349519121202400220
 MonoBehaviour:
   m_ObjectHideFlags: 0

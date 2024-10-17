@@ -33,6 +33,7 @@ public class Simulator : MonoBehaviour
         _coherenceBridge.ClientConnections.OnDestroyed -= RemoveCharacter;
     }
 
+    // OnSynced is called when network entities are ready, so a good place to check for already-connected clients
     private void OnSynced(CoherenceClientConnectionManager clientConnectionManager)
     {
         foreach (CoherenceClientConnection clientConnection in clientConnectionManager.GetAllClients())
@@ -42,7 +43,7 @@ public class Simulator : MonoBehaviour
         
         _coherenceBridge.ClientConnections.OnSynced -= OnSynced;
     }
-
+    
     private void CreateCharacter(CoherenceClientConnection clientConnection)
     {
         if (_characters.ContainsKey(clientConnection.ClientId))
@@ -51,12 +52,14 @@ public class Simulator : MonoBehaviour
             return;
         }
 
+        // We don't want to create a character for a Simulator
         if (clientConnection == _coherenceBridge.ClientConnections.GetMine()) return;
         
         Character character = Instantiate(_characterPrefab, Utilities.RandomPositionInCircle(.5f), Quaternion.identity);
         character.AssignColor(Utilities.RandomColor());
-        character.clientId = (uint)clientConnection.ClientId;
+        character.clientId = (uint)clientConnection.ClientId; // This is a synced property
         _characters.Add(clientConnection.ClientId, character);
+        
         Debug.Log($"Character with ID {clientConnection.ClientId} created.");
     }
     

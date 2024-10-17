@@ -41,17 +41,19 @@ public class Player : MonoBehaviour
 
     private void RequestMoveTo(RaycastHit hit)
     {
-        Vector3 desiredPosition = hit.point;
-        desiredPosition.y = 0f;
+        Vector3 desiredPosition;
 
         if (hit.collider.gameObject.CompareTag("Interactable"))
         {
             CoherenceSync targetInteractable = hit.collider.gameObject.GetComponent<CoherenceSync>();
+            desiredPosition = hit.collider.transform.position - hit.collider.transform.forward * 2f; // Move slightly back from the interactable
+            
             _simulatorSync.SendCommand<Simulator>(nameof(Simulator.MoveCharacterToInteract), MessageTarget.AuthorityOnly,
                 (uint)_coherenceBridge.ClientConnections.GetMine().ClientId, desiredPosition, targetInteractable);
         }
         else
         {
+            desiredPosition = hit.point;
             _simulatorSync.SendCommand<Simulator>(nameof(Simulator.MoveCharacterTo), MessageTarget.AuthorityOnly,
                 (uint)_coherenceBridge.ClientConnections.GetMine().ClientId, desiredPosition);
         }

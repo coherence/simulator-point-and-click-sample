@@ -3,7 +3,6 @@ using Coherence.Toolkit;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class Character : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class Character : MonoBehaviour
     private Animator _animator;
     private CoherenceBridge _coherenceBridge;
     private CoherenceSync _coherenceSync;
+    private bool _isMoving;
 
     private void Awake()
     {
@@ -55,20 +55,24 @@ public class Character : MonoBehaviour
     
     public void MoveTo(Vector3 newPosition, CoherenceSync targetInteractable = null)
     {
+        _isMoving = true;
         _navMeshAgent.destination = newPosition;
-        _animator.SetBool("IsMoving", true);
+        _animator.SetBool("IsMoving", _isMoving);
         this.targetInteractable = targetInteractable;
     }
 
     public void Update()
     {
-        if (_navMeshAgent.remainingDistance < 0.1f)
+        if (_isMoving &&
+            _navMeshAgent.remainingDistance < 0.1f)
         {
+            _isMoving = false;
+            
             if (targetInteractable != null)
             {
-                _coherenceSync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.AuthorityOnly, "Interact");
+                _coherenceSync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Interact");
             }
-            _animator.SetBool("IsMoving", false);
+            _animator.SetBool("IsMoving", _isMoving);
         }
     }
 }
