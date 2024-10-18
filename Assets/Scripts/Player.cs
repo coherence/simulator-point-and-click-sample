@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+#if !COHERENCE_SIMULATOR
     [SerializeField] private GameObject _positionMarker;
     
     private CoherenceBridge _coherenceBridge;
@@ -61,4 +62,5 @@ public class Player : MonoBehaviour
         _positionMarker.SetActive(true);
         _positionMarker.transform.position = desiredPosition;
     }
+#endif
 }

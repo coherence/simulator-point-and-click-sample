@@ -20,18 +20,23 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
+#if COHERENCE_SIMULATOR
         _coherenceSync = GetComponent<CoherenceSync>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
-        
+    }
+#else
+        // Only the Client needs to listen to OnLiveQuerySynced
         CoherenceBridgeStore.TryGetBridge(gameObject.scene, out _coherenceBridge);
         _coherenceBridge.onLiveQuerySynced.AddListener(OnLiveQuerySynced);
     }
-
+    
     private void OnLiveQuerySynced(CoherenceBridge arg0)
     {
         _coherenceBridge.onLiveQuerySynced.RemoveListener(OnLiveQuerySynced);
-        
+
+        // At this point, with the LiveQuery synced,
+        // we can be sure that the clientId property is set
         if(clientId == (uint)_coherenceBridge.ClientConnections.GetMine().ClientId)
             CreateCinemachineCamera();
     }
@@ -41,18 +46,19 @@ public class Character : MonoBehaviour
         CinemachineCamera cinemachineCamera = Instantiate(_cmCameraPrefab);
         cinemachineCamera.Target.TrackingTarget = cinemachineCamera.Target.LookAtTarget = transform;
     }
+#endif
 
-    public void AssignColor(Color newColor)
+#if COHERENCE_SIMULATOR
+    // This method is called by the Simulator script when the character is spawned on the Simulator side
+    public void Setup(uint newClientID, Color newColor)
     {
+        clientId = newClientID;
+        
         color = newColor;
         OnColorChanged(newColor, Color.clear);
     }
-    
-    public void OnColorChanged(Color oldValue, Color newValue)
-    {
-        GetComponentInChildren<SkinnedMeshRenderer>().material.color = newValue;
-    }
-    
+
+    // This is called on the Simulator, when the move NetworkCommand is received from the Client
     public void MoveTo(Vector3 newPosition, CoherenceSync targetInteractable = null)
     {
         _isMoving = true;
@@ -61,6 +67,8 @@ public class Character : MonoBehaviour
         this.targetInteractable = targetInteractable;
     }
 
+    // Only the Simulator should check for the remaining distance,
+    // as the NavMeshAgent is only enabled on the Simulator side
     public void Update()
     {
         if (_isMoving &&
@@ -70,9 +78,17 @@ public class Character : MonoBehaviour
             
             if (targetInteractable != null)
             {
+                // Notice MessageTarget.Other, as we want to trigger the animation on all Clients
+                Debug.Log($"Client ID {clientId} is interacting with {targetInteractable.gameObject.name}");
                 _coherenceSync.SendCommand<Animator>(nameof(Animator.SetTrigger), MessageTarget.Other, "Interact");
             }
             _animator.SetBool("IsMoving", _isMoving);
         }
+    }
+#endif
+    
+    public void OnColorChanged(Color oldValue, Color newValue)
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = newValue;
     }
 }

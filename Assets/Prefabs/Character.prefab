@@ -259,7 +259,6 @@ MonoBehaviour:
   coherenceTag: 
   componentActions:
   - rid: 8889060401066017352
-  - rid: 8889060401066017353
   floatingOriginMode: 0
   floatingOriginParentedMode: 1
   references:
@@ -451,10 +450,6 @@ MonoBehaviour:
       type: {class: DisableBehaviourComponentAction, ns: Coherence.Toolkit.ComponentActions, asm: Coherence.Toolkit}
       data:
         component: {fileID: 221588310098188929}
-    - rid: 8889060401066017353
-      type: {class: DisableBehaviourComponentAction, ns: Coherence.Toolkit.ComponentActions, asm: Coherence.Toolkit}
-      data:
-        component: {fileID: 7769962969807975110}
     - rid: 8889060403411419521
       type: {class: UIntBinding, ns: Coherence.Toolkit.Bindings.ValueBindings, asm: Coherence.Toolkit}
       data:
